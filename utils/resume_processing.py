@@ -1,5 +1,5 @@
 import re
-import PyPDF2
+from pdfminer.high_level import extract_text
 import docx
 import io
 import streamlit as st
@@ -27,9 +27,9 @@ def extract_text_from_resume(uploaded_file):
     text = ""
     try:
         if uploaded_file.type == "application/pdf":
-            pdf_reader = PyPDF2.PdfReader(io.BytesIO(uploaded_file.read()))
-            for page in pdf_reader.pages:
-                text += page.extract_text()
+            # Use pdfminer.six instead of PyPDF2
+            pdf_bytes = io.BytesIO(uploaded_file.read())
+            text = extract_text(pdf_bytes)
         elif (
             uploaded_file.type
             == "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
