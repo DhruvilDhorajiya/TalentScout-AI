@@ -8,5 +8,6 @@ chromadb
 huggingface-hub
 langchain-community
 sentence-transformers
-pypdf2
+pdfminer.six
 python-docx
+fitz
